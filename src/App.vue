@@ -1,16 +1,27 @@
 <template>
-  <navbar></navbar>
+   <navbar v-if="!isHomePage"></navbar>
   <div class="app">
+   
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Navbar from "@/pages/NavBar";
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap"
 export default {
   components: {
     Navbar,
   },
+  computed:{
+  
+    isHomePage() {
+    
+      return this.$route.fullPath === "/home";
+    },
+  
+  }
 };
 </script>
 
@@ -20,7 +31,5 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-.app {
-  padding: 20px;
-}
+
 </style>

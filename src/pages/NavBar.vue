@@ -6,6 +6,8 @@
       <my-button style="margin-left: 20px" @click="$router.push('/about')"
         >Описание</my-button
       >
+      
+      <my-button @click="$router.push('/postsWithStore')">Посты с использованием хранилища</my-button>
     </div>
   </div>
 </template>
