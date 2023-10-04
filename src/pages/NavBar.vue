@@ -8,6 +8,9 @@
       >
       
       <my-button @click="$router.push('/postsWithStore')">Посты с использованием хранилища</my-button>
+
+      
+
     </div>
   </div>
 </template>

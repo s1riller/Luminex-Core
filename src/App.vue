@@ -1,5 +1,5 @@
 <template>
-   <navbar v-if="!isHomePage"></navbar>
+   <navbarV2 v-if="!isHomePage"></navbarV2>
   <div class="app">
    
     <router-view></router-view>
@@ -7,12 +7,12 @@
 </template>
 
 <script>
-import Navbar from "@/pages/NavBar";
+import NavbarV2 from "@/pages/NavBarV2";
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 export default {
   components: {
-    Navbar,
+    NavbarV2,
   },
   computed:{
   
