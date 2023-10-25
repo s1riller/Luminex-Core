@@ -7,10 +7,10 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-white">Домой</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Тестирование</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Эффективность</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Статистика</a></li>
+          <router-link to="/" class="nav-link px-2 text-white">Домой</router-link>
+          <router-link to="/Testing" class="nav-link px-2 text-white">Тестирование</router-link>
+          <router-link to="/Performance" class="nav-link px-2 text-white">Эффективность</router-link>
+          <router-link to="/Statistic" class="nav-link px-2 text-white">Статистика</router-link>
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
         </ul>
 
@@ -18,7 +18,7 @@
           <input type="search" class="form-control form-control-dark text-bg-white" placeholder="Поиск" aria-label="Search">
         </form>
 
-        <div class="text-end">
+        <div class="text-end" v-if="!user">
 
 
           <button type="button" class="btn btn-outline-light me-2 rounded-5" data-bs-toggle="modal" data-bs-target="#signinModal">
@@ -53,7 +53,7 @@
 
             <div class="form-group pt-2">
               <label class="text-black mb-1">День рождения <span class=text-discord-red>*</span></label>
-              <input type="date" class="form-control" v-model="birthday"  name="date" placeholder="Дата">
+              <input type="date" class="form-control" v-model="birthday" name="birthday" placeholder="Дата">
             </div>
 
 
@@ -62,7 +62,7 @@
 
 
           <div class="modal-footer d-flex justify-content-center">
-            <button type="button" class="btn bg-discord-blue text-white rounded-5">Зарегистрироваться</button>
+            <button type="button" @click="signup" class="btn btn-success text-white rounded-5">Зарегистрироваться</button>
           </div>
         </div>
       </div>
@@ -114,12 +114,52 @@
 <script>
 
 import Calendar from "@/components/calendar.vue";
-
+import "@/static/discord.css";
+import axios from "axios";
 export default {
-  components: {Calendar}
+  components: {Calendar},
 
-  // Добавьте здесь ваш JavaScript-код и вычисляемые свойства
+  name: 'Navbar',
+  data(){
+    return{
+      API_URL:'http://127.0.0.1:8000',
+      user: null,
+      email: '',
+      password: '',
+      birthday: '',
+      isLoading: false
+    }
+  },
+  methods: {
+    async signup() {
+      this.isLoading = true;
 
+      try {
+        const response = await axios.post(
+            `${this.API_URL}/auth/users/`,
+            {
+              birth_date: this.birthday,
+              username: this.email,
+              password: this.password
+            },
+            {
+              headers: { 'Content-Type': 'application/json' }
+            }
+        );
+
+        this.user = response.data;
+        this.isLoading = false;
+        console.log('Успеншая регистрация'); // Вывести сообщение "OK" в консоль
+      } catch (error) {
+        // Обработка ошибки, если запрос не удался
+        console.error(error);
+        this.isLoading = false;
+      }
+    },
+    log() {
+      console.log('Hello')
+    }
+  }
 }
 </script>
 

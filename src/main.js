@@ -3,7 +3,7 @@ import App from './App'
 // import components from '@/components/UI';
 import router from "@/router/router";
 import directives from '@/directives';
-import store from '@/store';
+import store from '@/store/index';
 import 'bootstrap'
 // import './bootstrap/bootstrap.scss'
 import 'bootstrap/dist/css/bootstrap.css';

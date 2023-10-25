@@ -3,6 +3,7 @@
   <div class="app">
 
     <router-view></router-view>
+    {{reactions}}
   </div>
 </template>
 
@@ -10,15 +11,22 @@
 import navbar from "@/components/navbar";
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
+import {mapGetters,mapActions ,mapState,mapMutations} from 'vuex'
+import { } from 'vuex'
 export default {
+  name: "app",
   components: {
     navbar,
   },
-  computed:{
-
+  methods:{
+    ...mapActions({load:'loadReactions'})
+  },
+  created() {
+    this.load(1000)
 
   }
-};
+
+}
 </script>
 
 <style>
