@@ -3,7 +3,8 @@
   <div class="app">
 
     <router-view></router-view>
-    {{reactions}}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
   </div>
 </template>
 
@@ -19,12 +20,20 @@ export default {
     navbar,
   },
   methods:{
-    ...mapActions({load:'loadReactions'})
+    // ...mapActions({load:'loadReactions'})
   },
   created() {
-    this.load(1000)
+    // this.load(1000)
 
   }
+  ,
+ // computed:{
+    // ...mapGetters(['getReacions'])
+   // ,
+   // reactions(){
+   //    return this.getReacions
+   // }
+ // }
 
 }
 </script>

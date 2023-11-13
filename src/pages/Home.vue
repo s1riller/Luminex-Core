@@ -1,6 +1,8 @@
 <template>
   <body class="w-100 vh-100 bg-discord-black">
 
+
+
   <div class="bd-masthead mb-3" id="content">
     <div class="container-xxl bd-gutter">
       <div class="col-md-8 mx-auto text-center">
@@ -12,7 +14,7 @@
         <h1 class="mb-3 fw-semibold lh-1 text-white pt-5">ПРЕДСТАВЬТЕ СЕБЕ…</h1>
         <p class="lead mb-4 text-white">
            место, где найдете уютное пространство, где каждый посетитель будет чувствовать себя как дома, независимо от цели посещения. Это место, где вы можете провести тест и получить рекомендации для ухода за вашей кожей лица. Здесь вы также можете обсудить результаты теста и поделиться своим опытом с друзьями и единомышленниками. Наш сайт создан для того, чтобы общение и обмен информацией о коже стали легкими и приятными.</p>
-        <div class="d-flex flex-column flex-lg-row align-items-md-stretch justify-content-md-center gap-3 mb-4">
+        <div v-if="token==='null'"  class="d-flex flex-column flex-lg-row align-items-md-stretch justify-content-md-center gap-3 mb-4">
           <button type="button" class="btn bg-light rounded-5" data-bs-toggle="modal" data-bs-target="#signupModal">
             Нужна учетная запись?
           </button>
@@ -21,11 +23,22 @@
           </button>
         </div>
 
+        <div v-if="token!=='null'"  class="d-flex flex-column flex-lg-row align-items-md-stretch justify-content-md-center gap-3 mb-4">
+          <button @click.prevent="$router.push({ name: `testing` })" type="button" class="btn bg-light rounded-5">
+           Пройти тест
+          </button>
+        </div>
+<!--        this.$router.replace({ name: 'performance' });-->
 
 
       </div>
     </div>
   </div>
+
+    <modal  v-if="showModal">
+      sdd
+    </modal>
+
 
   </body>
 </template>
@@ -39,5 +52,23 @@ html {
   background-color: #23272A;
 }
 </style>
-<script setup>
+<script>
+
+export default {
+  data() {
+    return {
+      token: localStorage.getItem('token'),
+      showModal: false,
+    }
+  },
+  methods:{
+    openModal() {
+
+      console.log('sads')
+      this.showModal = true;
+
+    },
+
+  }
+}
 </script>
